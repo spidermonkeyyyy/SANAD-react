@@ -1,0 +1,39 @@
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+
+# IDE
+.idea/
+.vscode/
+# APK files
+*.apk
+# Build outputs
+android/app/build/
+android/app/outputs/
+android/build/
+# Generated files
+android/app/build/generated/
+# Android gradle cache and build artifacts
+android/.gradle/
+android/local.properties
+android/*/build/
+android/*/local.properties
+android/compat/build/
+android/android/build/

@@ -1,0 +1,35 @@
+pluginManagement {
+  repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+  }
+  includeBuild("../node_modules/@react-native/gradle-plugin")
+}
+
+plugins {
+  id("com.facebook.react.settings")
+}
+
+extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
+  ex.autolinkLibrariesFromCommand()
+}
+
+includeBuild("../node_modules/@react-native/gradle-plugin") {
+  dependencySubstitution {
+    substitute(module("com.facebook.react:react-native-gradle-plugin"))
+      .using(project(":react-native-gradle-plugin"))
+  }
+}
+
+dependencyResolutionManagement {
+  repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+  repositories {
+    google()
+    mavenCentral()
+  }
+}
+
+rootProject.name = "sanad-rn"
+include ":app"
+include ":compat"

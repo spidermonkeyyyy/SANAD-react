@@ -1,0 +1,41 @@
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+android {
+  namespace "com.sanad"
+  compileSdk 35
+
+  defaultConfig {
+    applicationId "com.sanad"
+    minSdk 24
+    targetSdk 35
+    versionCode 1
+    versionName "0.1.0"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+    }
+    debug {
+      debuggable true
+    }
+  }
+}
+
+dependencies {
+  implementation("com.facebook.react:react-android")
+  if (hermesEnabled.toBoolean()) {
+    implementation("com.facebook.react:hermes-android")
+  } else {
+    implementation("org.webkit:android-jsc:+")
+  }
+  implementation project(":compat")
+}
+
+react {
+  autolinkLibrariesWithApp()
+}

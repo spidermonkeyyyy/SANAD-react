@@ -1,0 +1,41 @@
+buildscript {
+  ext {
+    buildToolsVersion = "35.0.0"
+    minSdkVersion = 24
+    compileSdkVersion = 35
+    targetSdkVersion = 35
+    kotlinVersion = "1.9.25"
+  }
+  repositories {
+    google()
+    mavenCentral()
+  }
+  dependencies {
+      classpath("com.android.tools.build:gradle:8.6.0")
+      classpath("com.facebook.react:react-native-gradle-plugin:0.76.9")
+      classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    }
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.name == 'react-native-reanimated') {
+            project.tasks.findByName('assertMinimalReactNativeVersionTask')?.enabled = false
+        }
+        if (project.name == 'react-native-gesture-handler') {
+            project.dependencies.add("compileOnly", project.rootProject.project(":compat"))
+            project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach { task ->
+                def compatProject = project.rootProject.project(":compat")
+                task.dependsOn(compatProject.tasks.named("compileDebugKotlin"))
+                task.dependsOn(compatProject.tasks.named("compileDebugJavaWithJavac"))
+                def compatKotlinClasses = compatProject.file("build/tmp/kotlin-classes/debug")
+                def compatJavaClasses = compatProject.file("build/intermediates/javac/debug/compileDebugJavaWithJavac/classes")
+                task.libraries.from(compatKotlinClasses, compatJavaClasses)
+            }
+        }
+    }
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
+}

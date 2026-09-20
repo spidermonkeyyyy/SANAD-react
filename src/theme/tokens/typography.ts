@@ -1,0 +1,47 @@
+export const typography = {
+  fontFamily: {
+    urbanist: 'Urbanist',
+    openSans: 'OpenSans',
+    display: 'Urbanist',
+    body: 'OpenSans',
+  },
+  fontSize: {
+    labelSmall: 11,
+    xs: 12,
+    bodySmall: 12,
+    labelMedium: 12,
+    sm: 14,
+    bodyMedium: 14,
+    labelLarge: 14,
+    titleSmall: 14,
+    md: 16,
+    bodyLarge: 16,
+    titleMedium: 16,
+    lg: 20,
+    titleLarge: 20,
+    xl: 24,
+    headlineSmall: 24,
+    '2xl': 28,
+    headlineMedium: 28,
+    '3xl': 32,
+    headlineLarge: 32,
+    displaySmall: 36,
+    displayMedium: 45,
+    displayLarge: 57,
+  },
+  fontWeight: {
+    regular: '400' as const,
+    normal: '400' as const,
+    medium: '500' as const,
+    semibold: '600' as const,
+    bold: '700' as const,
+    extrabold: '800' as const,
+  },
+  lineHeight: {
+    tight: 1.15,
+    normal: 1.4,
+    relaxed: 1.6,
+  },
+} as const;
+
+export type TypographyToken = typeof typography;
